@@ -2,6 +2,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Curso, Profesor, Estudiante, Direccion
 
 def crear_curso(codigo, nombre, version):
+    curso = Curso.objects.filter(codigo=codigo)
+    if curso.exists():
+        return curso.first()
     curso = Curso.objects.create(
         codigo=codigo,
         nombre=nombre,
@@ -11,6 +14,9 @@ def crear_curso(codigo, nombre, version):
 
 
 def crear_profesor(rut, nombre, apellido, activo=True):
+    profesor = Profesor.objects.filter(rut=rut)
+    if profesor.exists():
+        return profesor.first()
     profesor = Profesor.objects.create(
         rut=rut,
         nombre=nombre,
@@ -20,13 +26,15 @@ def crear_profesor(rut, nombre, apellido, activo=True):
     return profesor
 
 
-def crear_estudiante(rut, nombre, apellido, fecha_nacimiento, curso, direccion=None, activo=True):
+def crear_estudiante(rut, nombre, apellido, fecha_nacimiento, direccion=None, activo=True):
+    estudiante = Estudiante.objects.filter(rut=rut)
+    if estudiante.exists():
+        return estudiante.first()
     estudiante = Estudiante.objects.create(
         rut=rut,
         nombre=nombre,
         apellido=apellido,
         fecha_nacimiento=fecha_nacimiento,
-        curso=curso,
         direccion=direccion,
         activo=activo
     )
@@ -79,12 +87,12 @@ def obtiene_direccion(id):
         print(f"Direccion con id {id} no encontrado")
         return None
 
-def agrega_profesor_a_curso(curso, profesor):
+def agrega_profesor_a_curso(curso:Curso, profesor:Profesor):
     curso.profesores.add(profesor)  
     curso.save()  
 
 
-def agrega_cursos_a_estudiante(estudiante, curso):
+def agrega_cursos_a_estudiante(estudiante:Estudiante, curso:Curso):
     estudiante.curso.add(curso) 
     estudiante.save()  
     imprime_estudiante_cursos(estudiante.rut)
