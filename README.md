@@ -1,5 +1,5 @@
 ## CAPTURAS
-Las capturas se encuentran en el archivo requerimientos.pdf dentro de la carpeta requerimientos
+Las capturas se encuentran en el archivo Desafio evaluado-Dia4-Modulo7-Cursos.pdf dentro de la carpeta requerimientos
 
 # CURSOS- Proyecto Django
 
@@ -41,7 +41,7 @@ andrea = crear_estudiante("33333","Andrea","Pérez","2000-01-01")
 pedro = crear_estudiante("44444","Pedro","Marcano","2002-12-01")
 ```
 
-creacion de crear_direccion
+creacion de direccion
 ```python
 dir = crear_direccion("Vicuña Mackenna", "123", "Santiago", "Santiago", "Metropolitana", "50")
 ```
